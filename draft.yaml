@@ -1,0 +1,135 @@
+models:
+
+  Morador:
+    user_id: id foreign
+    tipo: enum:proprietario,inquilino,visitante
+    timestamps: true
+    relationships:
+      belongsTo: "User"
+      hasMany: "Veiculo,Reserva,Ocorrencia,Sugestao"
+      belongsToMany: "Unidade:MoradorUnidade"
+
+  Unidade:
+    nome: string
+    tipo: enum:apartamento,loft,casa,vila
+    bloco: string
+    proprietario_id: id foreign
+    timestamps: true
+    relationships:
+      belongsTo: "Morador:proprietario_id"
+      belongsToMany: "Morador:MoradorUnidade"
+
+  Veiculo:
+    morador_id: id foreign
+    placa: string
+    tipo: enum:carro,moto,bike
+    timestamps: true
+    relationships:
+      belongsTo: "Morador"
+      hasMany: "MovimentacaoGaragem"
+
+  MovimentacaoGaragem:
+    veiculo_id: id foreign
+    entrada: datetime
+    saida: datetime nullable
+    tipo: enum:visitante,permanente
+    timestamps: true
+    relationships:
+      belongsTo: "Veiculo"
+
+  Espaco:
+    nome: string
+    capacidade: integer
+    valor: decimal:8,2
+    timestamps: true
+    relationships:
+      hasMany: "Reserva,Limpeza,Manutencao"
+
+  Reserva:
+    morador_id: id foreign
+    espaco_id: id foreign
+    status: enum:pendente,confirmada,cancelada
+    valor: decimal:8,2
+    data: datetime
+    timestamps: true
+    relationships:
+      belongsTo: "Morador,Espaco"
+
+  Ocorrencia:
+    morador_id: id foreign
+    titulo: string
+    descricao: text
+    status: enum:aberta,em_andamento,resolvida
+    timestamps: true
+    relationships:
+      belongsTo: "Morador"
+      belongsToMany: "Tag:OcorrenciaTag"
+
+  Sugestao:
+    morador_id: id foreign
+    titulo: string
+    descricao: text
+    status: enum:pendente,aprovada,concluida
+    timestamps: true
+    relationships:
+      belongsTo: "Morador"
+      belongsToMany: "Tag:SugestaoTag"
+
+  Limpeza:
+    espaco_id: id foreign
+    responsavel_id: id foreign
+    data: datetime
+    status: enum:pendente,concluida,em_andamento
+    timestamps: true
+    relationships:
+      belongsTo: "Espaco, Morador:responsavel_id"
+
+  Despesa:
+    titulo: string
+    valor: decimal:8,2
+    categoria: string
+    data: date
+    timestamps: true
+
+  Tag:
+    nome: string
+    timestamps: true
+    relationships:
+      belongsToMany: "Ocorrencia:OcorrenciaTag,Sugestao:SugestaoTag"
+
+  Notificacao:
+    user_id: id foreign
+    tipo: string
+    mensagem: text
+    status: enum:lida,nao_lida
+    timestamps: true
+    relationships:
+      belongsTo: "User"
+
+  Manutencao:
+    espaco_id: id foreign
+    tipo: enum:preventiva,corretiva
+    responsavel_id: id foreign
+    descricao: text
+    data_prevista: datetime
+    data_conclusao: datetime nullable
+    status: enum:pendente,em_andamento,concluida
+    timestamps: true
+    relationships:
+      belongsTo: "Espaco, Morador:responsavel_id"
+
+  MoradorUnidade:
+    morador_id: id foreign
+    unidade_id: id foreign
+    tipo: enum:proprietario,inquilino
+    timestamps: true
+
+  OcorrenciaTag:
+    ocorrencia_id: id foreign
+    tag_id: id foreign
+    timestamps: true
+
+  SugestaoTag:
+    sugestao_id: id foreign
+    tag_id: id foreign
+    timestamps: true
