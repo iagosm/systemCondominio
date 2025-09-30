@@ -11,13 +11,16 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 const props = defineProps({
-  user: Object
+  user: Object,
+  roles: Array,
+  userRoles: Array
 });
 
 const form = useForm({
   "name": props.user.name,
   "email": props.user.email,
   "password": "",
+  "roles": props.userRoles || []
 });
 </script>
 
@@ -57,6 +60,16 @@ const form = useForm({
             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Digite sua senha" />
           <p v-if="form.errors.password" class="text-red-500 text-sm mt-1">{{ form.errors.password }}</p>
+        </div>
+        <div class="grid gap-2">
+          <label for="name" class="text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed">
+            Permissões:
+          </label>
+          <label v-for="role in roles"
+            class="flex items-center space-x-2">
+            <input :value="role" v-model="form.roles" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-2">
+            <span class="text-gray-800 capitalize">{{role}}</span>
+          </label>
         </div>
         <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md">
           Salvar

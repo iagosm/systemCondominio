@@ -14,7 +14,9 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Users, Notebook } from 'lucide-vue-next';
+import { 
+    BookOpen, Folder, LayoutGrid, Users, Notebook, Car , DollarSign, TriangleAlert, Calendar, Brush, UserRoundCheck
+} from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -33,19 +35,49 @@ const mainNavItems: NavItem[] = [
         href: '/roles',
         icon: Notebook,
     },
+    {
+        title: 'Gastos',
+        href: '/gastos',
+        icon: DollarSign,
+    },
+    {
+        title: 'Veiculos',
+        href: '/veiculos',
+        icon: Car,
+    },
+    {
+        title: 'Ocorrências',
+        href: '/ocorrencias',
+        icon: TriangleAlert,
+    },
+    {
+        title: 'Reservas',
+        href: '/reservas',
+        icon: Calendar,
+    },
+    {
+        title: 'Limpeza',
+        href: '/limpeza',
+        icon: Brush,
+    },
+    {
+        title: 'Moradores',
+        href: '/moradores',
+        icon: UserRoundCheck,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
+    // {
+    //     title: 'Github Repo',
+    //     href: 'https://github.com/laravel/vue-starter-kit',
+    //     icon: Folder,
+    // },
+    // {
+    //     title: 'Documentation',
+    //     href: 'https://laravel.com/docs/starter-kits#vue',
+    //     icon: BookOpen,
+    // },
 ];
 </script>
 
