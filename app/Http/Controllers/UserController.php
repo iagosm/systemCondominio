@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('Users/Index', [
-        'users' => User::with('roles')->get(),
+            'users' => User::with('roles')->get(),
         ]);
     }
 
@@ -38,11 +38,12 @@ class UserController extends Controller
         $request->validate([
             "name" => "required",
             "email" => "required",
+            "phone" => "required",
             "password" => "required",
             "roles" => "required",
         ]);
         $user = User::create(
-            $request->only(['name', 'email' ]) + ['password' => Hash::make($request->password)]
+            $request->only(['name', 'email', 'phone' ]) + ['password' => Hash::make($request->password)]
         );
         $user->syncRoles($request->roles);
         return to_route('users.index');
@@ -79,11 +80,13 @@ class UserController extends Controller
         $request->validate([
             "name" => "required",
             "email" => "required",
+            "phone" => "required",
             "roles" => "required"
         ]);
         $user = User::find($id);
         $user->name = $request['name'];
         $user->email = $request['email'];
+        $user->phone = $request['phone'];
         if($request->password) {
             $user->password = Hash::make($request['password']);
         }

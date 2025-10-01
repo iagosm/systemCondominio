@@ -26,9 +26,9 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Usuários',
-        href: '/users',
-        icon: Users,
+        title: 'Moradores',
+        href: '/residents',
+        icon: UserRoundCheck,
     },
     {
         title: 'Permissões',
@@ -62,7 +62,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Moradores',
-        href: '/moradores',
+        href: '/residents',
         icon: UserRoundCheck,
     },
 ];

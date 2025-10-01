@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Tag extends Model
+class Suggestion extends Model
 {
     use HasFactory;
 
@@ -16,7 +17,10 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'resident_id',
+        'title',
+        'description',
+        'status',
     ];
 
     /**
@@ -28,16 +32,17 @@ class Tag extends Model
     {
         return [
             'id' => 'integer',
+            'resident_id' => 'integer',
         ];
     }
 
-    public function incidentTags(): BelongsToMany
+    public function resident(): BelongsTo
     {
-        return $this->belongsToMany(Incident::class);
+        return $this->belongsTo(Resident::class);
     }
 
     public function suggestionTags(): BelongsToMany
     {
-        return $this->belongsToMany(Suggestion::class);
+        return $this->belongsToMany(Tag::class);
     }
 }

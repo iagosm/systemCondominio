@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Tag extends Model
+class Space extends Model
 {
     use HasFactory;
 
@@ -17,6 +17,8 @@ class Tag extends Model
      */
     protected $fillable = [
         'name',
+        'capacity',
+        'price',
     ];
 
     /**
@@ -28,16 +30,22 @@ class Tag extends Model
     {
         return [
             'id' => 'integer',
+            'price' => 'decimal:2',
         ];
     }
 
-    public function incidentTags(): BelongsToMany
+    public function bookings(): HasMany
     {
-        return $this->belongsToMany(Incident::class);
+        return $this->hasMany(Booking::class);
     }
 
-    public function suggestionTags(): BelongsToMany
+    public function cleanings(): HasMany
     {
-        return $this->belongsToMany(Suggestion::class);
+        return $this->hasMany(Cleaning::class);
+    }
+
+    public function maintenances(): HasMany
+    {
+        return $this->hasMany(Maintenance::class);
     }
 }

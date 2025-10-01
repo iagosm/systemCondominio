@@ -4,16 +4,18 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Tag;
+use App\Models\Resident;
+use App\Models\ResidentUnit;
+use App\Models\Unit;
 
-class TagFactory extends Factory
+class ResidentUnitFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tag::class;
+    protected $model = ResidentUnit::class;
 
     /**
      * Define the model's default state.
@@ -21,7 +23,9 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'resident_id' => Resident::factory(),
+            'unit_id' => Unit::factory(),
+            'type' => fake()->randomElement(["proprietario","inquilino"]),
         ];
     }
 }

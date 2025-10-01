@@ -5,36 +5,36 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
-    title: 'Editar Usuários',
-    href: '/users',
+    title: 'Editar Morador',
+    href: '/residents',
   },
 ];
 
 const props = defineProps({
-  user: Object,
-  roles: Array,
-  userRoles: Array
+  resident: Object,
+  roles: Array
 });
 
 const form = useForm({
-  "name": props.user.name,
-  "email": props.user.email,
-  "phone": props.user.phone,
+  "name": props.resident.name,
+  "email": props.resident.email,
+  "phone": props.resident.phone,
   "password": "",
-  "roles": props.userRoles || []
+  "type": props.resident.type,
+  "roles": props.resident.roles || []
 });
 </script>
 
 <template>
 
-  <Head title="Editar Usuário" />
+  <Head title="Editar Morador" />
   <AppLayout :breadcrumbs="breadcrumbs">
     <div class="overflow-x-auto p-3">
       <Link :href="route('residents.index')"
         class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
       Voltar
       </Link>
-      <form @submit.prevent="form.put(route('users.update', user.id))" class="space-y-6 mt-4 max-w-md mx-auto">
+      <form @submit.prevent="form.put(route('residents.update', resident.id))" class="space-y-6 mt-4 max-w-md mx-auto">
         <div class="grid gap-2">
           <label for="name" class="text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed">
             Nome:

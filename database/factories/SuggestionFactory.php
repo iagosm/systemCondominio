@@ -4,16 +4,17 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Tag;
+use App\Models\Resident;
+use App\Models\Suggestion;
 
-class TagFactory extends Factory
+class SuggestionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tag::class;
+    protected $model = Suggestion::class;
 
     /**
      * Define the model's default state.
@@ -21,7 +22,10 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'resident_id' => Resident::factory(),
+            'title' => fake()->sentence(4),
+            'description' => fake()->text(),
+            'status' => fake()->randomElement(["pendente","aprovada","concluida"]),
         ];
     }
 }

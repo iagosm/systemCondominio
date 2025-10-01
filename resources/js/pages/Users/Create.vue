@@ -17,6 +17,7 @@ defineProps({
 const form = useForm({
   "name": "",
   "email": "",
+  "phone": "",
   "password": "",
   "roles": [],
 });
@@ -49,6 +50,15 @@ const form = useForm({
             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Digite seu e-mail" />
           <p v-if="form.errors.email" class="text-red-500 text-sm mt-1">{{ form.errors.email }}</p>
+        </div>
+        <div class="grid gap-2">
+          <label for="email" class="text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed">
+            Telefone:
+          </label>
+          <input id="email" name="phone" v-model="form.phone"
+            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            placeholder="Digite seu e-mail" />
+          <p v-if="form.errors.email" class="text-red-500 text-sm mt-1">{{ form.errors.phone }}</p>
         </div>
         <div class="grid gap-2">
           <label for="name" class="text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed">

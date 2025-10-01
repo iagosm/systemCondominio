@@ -1,55 +1,55 @@
 created:
-    - database/factories/MoradorFactory.php
-    - database/factories/UnidadeFactory.php
-    - database/factories/VeiculoFactory.php
-    - database/factories/MovimentacaoGaragemFactory.php
-    - database/factories/EspacoFactory.php
-    - database/factories/ReservaFactory.php
-    - database/factories/OcorrenciaFactory.php
-    - database/factories/SugestaoFactory.php
-    - database/factories/LimpezaFactory.php
-    - database/factories/DespesaFactory.php
+    - database/factories/ResidentFactory.php
+    - database/factories/UnitFactory.php
+    - database/factories/VehicleFactory.php
+    - database/factories/GarageMovementFactory.php
+    - database/factories/SpaceFactory.php
+    - database/factories/BookingFactory.php
+    - database/factories/IncidentFactory.php
+    - database/factories/SuggestionFactory.php
+    - database/factories/CleaningFactory.php
+    - database/factories/ExpenseFactory.php
     - database/factories/TagFactory.php
-    - database/factories/NotificacaoFactory.php
-    - database/factories/ManutencaoFactory.php
-    - database/factories/MoradorUnidadeFactory.php
-    - database/factories/OcorrenciaTagFactory.php
-    - database/factories/SugestaoTagFactory.php
-    - database/migrations/2025_09_28_153026_create_moradors_table.php
-    - database/migrations/2025_09_28_153027_create_unidades_table.php
-    - database/migrations/2025_09_28_153028_create_veiculos_table.php
-    - database/migrations/2025_09_28_153029_create_movimentacao_garagems_table.php
-    - database/migrations/2025_09_28_153030_create_espacos_table.php
-    - database/migrations/2025_09_28_153031_create_reservas_table.php
-    - database/migrations/2025_09_28_153032_create_ocorrencias_table.php
-    - database/migrations/2025_09_28_153033_create_sugestaos_table.php
-    - database/migrations/2025_09_28_153034_create_limpezas_table.php
-    - database/migrations/2025_09_28_153035_create_despesas_table.php
-    - database/migrations/2025_09_28_153036_create_tags_table.php
-    - database/migrations/2025_09_28_153037_create_notificacaos_table.php
-    - database/migrations/2025_09_28_153038_create_manutencaos_table.php
-    - database/migrations/2025_09_28_153039_create_morador_unidades_table.php
-    - database/migrations/2025_09_28_153040_create_ocorrencia_tags_table.php
-    - database/migrations/2025_09_28_153041_create_sugestao_tags_table.php
-    - database/migrations/2025_09_28_153042_create_morador_unidade_table.php
-    - database/migrations/2025_09_28_153043_create_ocorrencia_tag_table.php
-    - database/migrations/2025_09_28_153044_create_sugestao_tag_table.php
-    - app/Models/Morador.php
-    - app/Models/Unidade.php
-    - app/Models/Veiculo.php
-    - app/Models/MovimentacaoGaragem.php
-    - app/Models/Espaco.php
-    - app/Models/Reserva.php
-    - app/Models/Ocorrencia.php
-    - app/Models/Sugestao.php
-    - app/Models/Limpeza.php
-    - app/Models/Despesa.php
+    - database/factories/NotificationFactory.php
+    - database/factories/MaintenanceFactory.php
+    - database/factories/ResidentUnitFactory.php
+    - database/factories/IncidentTagFactory.php
+    - database/factories/SuggestionTagFactory.php
+    - database/migrations/2025_09_30_231542_create_residents_table.php
+    - database/migrations/2025_09_30_231543_create_units_table.php
+    - database/migrations/2025_09_30_231544_create_vehicles_table.php
+    - database/migrations/2025_09_30_231545_create_garage_movements_table.php
+    - database/migrations/2025_09_30_231546_create_spaces_table.php
+    - database/migrations/2025_09_30_231547_create_bookings_table.php
+    - database/migrations/2025_09_30_231548_create_incidents_table.php
+    - database/migrations/2025_09_30_231549_create_suggestions_table.php
+    - database/migrations/2025_09_30_231550_create_cleanings_table.php
+    - database/migrations/2025_09_30_231551_create_expenses_table.php
+    - database/migrations/2025_09_30_231552_create_tags_table.php
+    - database/migrations/2025_09_30_231553_create_notifications_table.php
+    - database/migrations/2025_09_30_231554_create_maintenances_table.php
+    - database/migrations/2025_09_30_231555_create_resident_units_table.php
+    - database/migrations/2025_09_30_231556_create_incident_tags_table.php
+    - database/migrations/2025_09_30_231557_create_suggestion_tags_table.php
+    - database/migrations/2025_09_30_231558_create_resident_unit_table.php
+    - database/migrations/2025_09_30_231559_create_incident_tag_table.php
+    - database/migrations/2025_09_30_231600_create_suggestion_tag_table.php
+    - app/Models/Resident.php
+    - app/Models/Unit.php
+    - app/Models/Vehicle.php
+    - app/Models/GarageMovement.php
+    - app/Models/Space.php
+    - app/Models/Booking.php
+    - app/Models/Incident.php
+    - app/Models/Suggestion.php
+    - app/Models/Cleaning.php
+    - app/Models/Expense.php
     - app/Models/Tag.php
-    - app/Models/Notificacao.php
-    - app/Models/Manutencao.php
-    - app/Models/MoradorUnidade.php
-    - app/Models/OcorrenciaTag.php
-    - app/Models/SugestaoTag.php
+    - app/Models/Notification.php
+    - app/Models/Maintenance.php
+    - app/Models/ResidentUnit.php
+    - app/Models/IncidentTag.php
+    - app/Models/SuggestionTag.php
 models:
     Morador: { user_id: 'id foreign', tipo: 'enum:proprietario,inquilino,visitante', timestamps: timestamps, relationships: { belongsTo: User, hasMany: 'Veiculo,Reserva,Ocorrencia,Sugestao', belongsToMany: 'Unidade:MoradorUnidade' } }
     Unidade: { nome: string, tipo: 'enum:apartamento,loft,casa,vila', bloco: string, proprietario_id: 'id foreign', timestamps: timestamps, relationships: { belongsTo: 'Morador:proprietario_id', belongsToMany: 'Morador:MoradorUnidade' } }
@@ -61,9 +61,24 @@ models:
     Sugestao: { morador_id: 'id foreign', titulo: string, descricao: text, status: 'enum:pendente,aprovada,concluida', timestamps: timestamps, relationships: { belongsTo: Morador, belongsToMany: 'Tag:SugestaoTag' } }
     Limpeza: { espaco_id: 'id foreign', responsavel_id: 'id foreign', data: datetime, status: 'enum:pendente,concluida,em_andamento', timestamps: timestamps, relationships: { belongsTo: 'Espaco, Morador:responsavel_id' } }
     Despesa: { titulo: string, valor: 'decimal:8,2', categoria: string, data: date, timestamps: timestamps }
-    Tag: { nome: string, timestamps: timestamps, relationships: { belongsToMany: 'Ocorrencia:OcorrenciaTag,Sugestao:SugestaoTag' } }
+    Tag: { name: string, timestamps: timestamps, relationships: { belongsToMany: 'Incident:IncidentTag,Suggestion:SuggestionTag' } }
     Notificacao: { user_id: 'id foreign', tipo: string, mensagem: text, status: 'enum:lida,nao_lida', timestamps: timestamps, relationships: { belongsTo: User } }
     Manutencao: { espaco_id: 'id foreign', tipo: 'enum:preventiva,corretiva', responsavel_id: 'id foreign', descricao: text, data_prevista: datetime, data_conclusao: 'datetime nullable', status: 'enum:pendente,em_andamento,concluida', timestamps: timestamps, relationships: { belongsTo: 'Espaco, Morador:responsavel_id' } }
     MoradorUnidade: { morador_id: 'id foreign', unidade_id: 'id foreign', tipo: 'enum:proprietario,inquilino', timestamps: timestamps }
     OcorrenciaTag: { ocorrencia_id: 'id foreign', tag_id: 'id foreign', timestamps: timestamps }
     SugestaoTag: { sugestao_id: 'id foreign', tag_id: 'id foreign', timestamps: timestamps }
+    Resident: { user_id: 'id foreign', type: 'enum:proprietario,inquilino,visitante', timestamps: timestamps, relationships: { belongsTo: User, hasMany: 'Vehicle,Booking,Incident,Suggestion', belongsToMany: 'Unit:ResidentUnit' } }
+    Unit: { name: string, type: 'enum:apartamento,loft,casa,vila', block: string, owner_id: 'id foreign', timestamps: timestamps, relationships: { belongsTo: 'Resident:owner_id', belongsToMany: 'Resident:ResidentUnit' } }
+    Vehicle: { resident_id: 'id foreign', plate: string, type: 'enum:carro,moto,bike', timestamps: timestamps, relationships: { belongsTo: Resident, hasMany: GarageMovement } }
+    GarageMovement: { vehicle_id: 'id foreign', entry: datetime, exit: 'datetime nullable', type: 'enum:visitante,permanente', timestamps: timestamps, relationships: { belongsTo: Vehicle } }
+    Space: { name: string, capacity: integer, price: 'decimal:8,2', timestamps: timestamps, relationships: { hasMany: 'Booking,Cleaning,Maintenance' } }
+    Booking: { resident_id: 'id foreign', space_id: 'id foreign', status: 'enum:pendente,confirmada,cancelada', price: 'decimal:8,2', date: datetime, timestamps: timestamps, relationships: { belongsTo: 'Resident,Space' } }
+    Incident: { resident_id: 'id foreign', title: string, description: text, status: 'enum:aberta,em_andamento,resolvida', timestamps: timestamps, relationships: { belongsTo: Resident, belongsToMany: 'Tag:IncidentTag' } }
+    Suggestion: { resident_id: 'id foreign', title: string, description: text, status: 'enum:pendente,aprovada,concluida', timestamps: timestamps, relationships: { belongsTo: Resident, belongsToMany: 'Tag:SuggestionTag' } }
+    Cleaning: { space_id: 'id foreign', responsible_id: 'id foreign', date: datetime, status: 'enum:pendente,concluida,em_andamento', timestamps: timestamps, relationships: { belongsTo: 'Space, Resident:responsible_id' } }
+    Expense: { title: string, amount: 'decimal:8,2', category: string, date: date, timestamps: timestamps }
+    Notification: { user_id: 'id foreign', type: string, message: text, status: 'enum:lida,nao_lida', timestamps: timestamps, relationships: { belongsTo: User } }
+    Maintenance: { space_id: 'id foreign', type: 'enum:preventiva,corretiva', responsible_id: 'id foreign', description: text, planned_date: datetime, completed_date: 'datetime nullable', status: 'enum:pendente,em_andamento,concluida', timestamps: timestamps, relationships: { belongsTo: 'Space, Resident:responsible_id' } }
+    ResidentUnit: { resident_id: 'id foreign', unit_id: 'id foreign', type: 'enum:proprietario,inquilino', timestamps: timestamps }
+    IncidentTag: { incident_id: 'id foreign', tag_id: 'id foreign', timestamps: timestamps }
+    SuggestionTag: { suggestion_id: 'id foreign', tag_id: 'id foreign', timestamps: timestamps }

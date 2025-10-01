@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Tag;
+use App\Models\Expense;
 
-class TagFactory extends Factory
+class ExpenseFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tag::class;
+    protected $model = Expense::class;
 
     /**
      * Define the model's default state.
@@ -21,7 +21,10 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'title' => fake()->sentence(4),
+            'amount' => fake()->randomFloat(2, 0, 999999.99),
+            'category' => fake()->word(),
+            'date' => fake()->date(),
         ];
     }
 }

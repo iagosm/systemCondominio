@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Tag extends Model
+class Expense extends Model
 {
     use HasFactory;
 
@@ -16,7 +15,10 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'title',
+        'amount',
+        'category',
+        'date',
     ];
 
     /**
@@ -28,16 +30,8 @@ class Tag extends Model
     {
         return [
             'id' => 'integer',
+            'amount' => 'decimal:2',
+            'date' => 'date',
         ];
-    }
-
-    public function incidentTags(): BelongsToMany
-    {
-        return $this->belongsToMany(Incident::class);
-    }
-
-    public function suggestionTags(): BelongsToMany
-    {
-        return $this->belongsToMany(Suggestion::class);
     }
 }

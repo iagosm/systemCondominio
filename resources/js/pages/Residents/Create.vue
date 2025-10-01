@@ -5,36 +5,35 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
-    title: 'Editar Usuários',
-    href: '/users',
+    title: 'Adicionar Morador',
+    href: '/residents',
   },
 ];
 
-const props = defineProps({
-  user: Object,
-  roles: Array,
-  userRoles: Array
-});
+defineProps({
+  "roles": Array
+})
 
 const form = useForm({
-  "name": props.user.name,
-  "email": props.user.email,
-  "phone": props.user.phone,
+  "name": "",
+  "email": "",
+  "phone": "",
+  "type": "",
   "password": "",
-  "roles": props.userRoles || []
+  "roles": [],
 });
 </script>
 
 <template>
 
-  <Head title="Editar Usuário" />
+  <Head title="Adicionar Moradore" />
   <AppLayout :breadcrumbs="breadcrumbs">
     <div class="overflow-x-auto p-3">
       <Link :href="route('residents.index')"
         class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
       Voltar
       </Link>
-      <form @submit.prevent="form.put(route('users.update', user.id))" class="space-y-6 mt-4 max-w-md mx-auto">
+      <form @submit.prevent="form.post(route('residents.store'))" class="space-y-6 mt-4 max-w-md mx-auto">
         <div class="grid gap-2">
           <label for="name" class="text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed">
             Nome:
@@ -82,7 +81,7 @@ const form = useForm({
           </label>
         </div>
         <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md">
-          Salvar
+          Criar
         </button>
       </form>
     </div>

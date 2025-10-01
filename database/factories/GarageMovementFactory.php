@@ -4,16 +4,17 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Tag;
+use App\Models\GarageMovement;
+use App\Models\Vehicle;
 
-class TagFactory extends Factory
+class GarageMovementFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tag::class;
+    protected $model = GarageMovement::class;
 
     /**
      * Define the model's default state.
@@ -21,7 +22,10 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'vehicle_id' => Vehicle::factory(),
+            'entry' => fake()->dateTime(),
+            'exit' => fake()->dateTime(),
+            'type' => fake()->randomElement(["visitante","permanente"]),
         ];
     }
 }

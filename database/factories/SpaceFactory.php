@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Tag;
+use App\Models\Space;
 
-class TagFactory extends Factory
+class SpaceFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tag::class;
+    protected $model = Space::class;
 
     /**
      * Define the model's default state.
@@ -22,6 +22,8 @@ class TagFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'capacity' => fake()->numberBetween(-10000, 10000),
+            'price' => fake()->randomFloat(2, 0, 999999.99),
         ];
     }
 }

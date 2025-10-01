@@ -7,17 +7,17 @@ import { can } from '@/lib/can';
 const breadcrumbs: BreadcrumbItem[] = [
   {
     title: 'Usuários',
-    href: '/users',
+    href: '/residents',
   },
 ];
 
 defineProps({
-  users: Array
+  residents: Array
 });
 
-function deleteUser(id) {
+function deleteresident(id) {
   if(confirm("Você tem certeza que deseja excluir?")) {
-    router.delete(route("users.destroy", id));
+    router.delete(route("residents.destroy", id));
   }
 }
 </script>
@@ -28,8 +28,8 @@ function deleteUser(id) {
   <AppLayout :breadcrumbs="breadcrumbs">
     <div class="overflow-x-auto p-3">
       <Link 
-        v-if="can('users.create')"
-        :href="route('users.create')"
+        v-if="can('residents.create')"
+        :href="route('residents.create')"
         class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
         Adicionar
       </Link>
@@ -40,40 +40,42 @@ function deleteUser(id) {
             <th scope="col" class="px-6 py-3">Nome</th>
             <th scope="col" class="px-6 py-3">E-mail</th>
             <th scope="col" class="px-6 py-3">Telefone</th>
+            <th scope="col" class="px-6 py-3">Tipo</th>
             <th scope="col" class="px-6 py-3">Permissões</th>
             <th scope="col" class="px-6 py-3">Ações</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.id" class="bg-white odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900 dark:even:bg-gray-800">
-            <td class="px-6 py-2 font-medium text-gray-900 dark:text-white">{{user.id}}</td>
-            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{user.name}}</td>
-            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{user.email}}</td>
-            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{user.phone}}</td>
+          <tr v-for="resident in residents" :key="resident.id" class="bg-white odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900 dark:even:bg-gray-800">
+            <td class="px-6 py-2 font-medium text-gray-900 dark:text-white">{{resident.id}}</td>
+            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{resident.name}}</td>
+            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{resident.email}}</td>
+            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{resident.phone}}</td>
+            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{resident.type}}</td>
             <td class="px-6 py-2 text-gray-600 dark:text-gray-300">
               <span
-                v-for="roles in user.roles"
-                :key="roles"
+                v-for="roles in resident.roles"
+                :key="roles.name"
                 class="mr-1 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5">
                   {{ roles }}
                 </span>
             </td>
             <td class="flex gap-2 px-6 py-2">
               <Link
-              v-if="can('users.view')"
-                :href="route('users.show', user.id)"
+              v-if="can('residents.view')"
+                :href="route('residents.show', resident.id)"
                 class="mr-1 cursor-pointer rounded bg-gray-600 px-3 py-2 text-xs font-medium text-white hover:bg-gray-700">
                 Visualizar
               </Link>
               <Link
-                v-if="can('users.edit')"
-                :href="route('users.edit', user.id)"
+                v-if="can('residents.edit')"
+                :href="route('residents.edit', resident.id)"
                 class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
                 Editar
               </Link>
               <button
-                v-if="can('users.delete')"
-                @click="deleteUser(user.id)"
+                v-if="can('residents.delete')"
+                @click="deleteresident(resident.id)"
                 class="cursor-pointer rounded bg-red-600 px-3 py-2 text-xs font-medium text-white hover:bg-red-700">
                 Deletar
               </button>
