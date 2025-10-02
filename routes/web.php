@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ResidentsController;
 use App\Http\Controllers\RoleController;
+// use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +23,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource("residents", ResidentsController::class);
+    // Route::resource("units", UnitController::class);// Pendente
+    Route::resource("incidents", IncidentController::class);
     Route::resource("users", UserController::class);
     Route::resource("roles", RoleController::class);
 });

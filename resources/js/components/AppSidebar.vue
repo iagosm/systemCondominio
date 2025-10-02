@@ -15,7 +15,7 @@ import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { 
-    BookOpen, Folder, LayoutGrid, Users, Notebook, Car , DollarSign, TriangleAlert, Calendar, Brush, UserRoundCheck
+    LayoutGrid, Notebook, Car , DollarSign, TriangleAlert, Calendar, Brush, UserRoundCheck
 } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
@@ -31,9 +31,9 @@ const mainNavItems: NavItem[] = [
         icon: UserRoundCheck,
     },
     {
-        title: 'Permissões',
-        href: '/roles',
-        icon: Notebook,
+        title: 'Ocorrências',
+        href: '/incidents',
+        icon: TriangleAlert,
     },
     {
         title: 'Gastos',
@@ -41,14 +41,14 @@ const mainNavItems: NavItem[] = [
         icon: DollarSign,
     },
     {
+        title: 'Permissões',
+        href: '/roles',
+        icon: Notebook,
+    },
+    {
         title: 'Veiculos',
         href: '/veiculos',
         icon: Car,
-    },
-    {
-        title: 'Ocorrências',
-        href: '/ocorrencias',
-        icon: TriangleAlert,
     },
     {
         title: 'Reservas',

@@ -70,7 +70,7 @@ class ResidentsController extends Controller
             'type' => 'required',
             'roles' => 'nullable',
         ]);
-        dd($request);
+        // dd($request->phone);
         // Criar usuário
         $user = User::create([
             'name' => $request->name,
@@ -82,7 +82,6 @@ class ResidentsController extends Controller
         // Atribuir role
         $user->assignRole($request->roles ?? 'Morador');
 
-        // Criar registro de resident vinculado
         $resident = Resident::create([
             'user_id' => $user->id,
             'type' => $request->type
