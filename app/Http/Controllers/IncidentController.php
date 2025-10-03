@@ -49,7 +49,9 @@ class IncidentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render('Incidents/Show', [
+            'incident' => Incident::find($id)
+        ]);
     }
 
     /**
@@ -57,7 +59,10 @@ class IncidentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render('Incidents/Edit', [
+            'incident' => Incident::find($id), 
+            'residents' => Resident::with('user:id,name')->get(), 
+        ]);
     }
 
     /**
@@ -65,7 +70,20 @@ class IncidentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'resident_id' => 'required',
+            'status' => 'required',
+        ]);
+        $incident = Incident::find($id);
+        $incident->title = $request['title'];
+        $incident->description = $request['description'];
+        $incident->resident_id = $request['resident_id'];
+        $incident->status = $request['status'];
+        $incident->save();
+        return to_route('incidents.index');
     }
 
     /**
@@ -73,6 +91,7 @@ class IncidentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Incident::destroy($id);
+        return to_route('incidents.index');
     }
 }

@@ -5,31 +5,29 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
-    title: 'Editar Morador',
-    href: '/residents',
+    title: 'Adicionar Ocorrência',
+    href: '/incidents',
   },
 ];
 
-const props = defineProps({
-  incident: Object,
-  residents: Array
-});
+defineProps({
+  "residents": Array
+})
 
 const form = useForm({
-  "title": props.incident.title,
-  "description": props.incident.description,
-  "status": props.incident.status,
-  "resident_id": props.incident.resident_id,
-  "roles": props.resident || []
+  "title": "",
+  "description": "",
+  "status": "",
+  "resident_id": "",
 });
 </script>
 
 <template>
 
-  <Head title="Editar Morador" />
+  <Head title="Adicionar Ocorrência" />
   <AppLayout :breadcrumbs="breadcrumbs">
     <div class="overflow-x-auto p-3">
-      <Link :href="route('residents.index')"
+      <Link :href="route('incidents.index')"
         class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
       Voltar
       </Link>
@@ -76,7 +74,7 @@ const form = useForm({
         </div>
         <div class="w-full max-w-sm">
           <label for="tipo" class="block text-sm font-semibold text-gray-800 mb-2">
-            Tipo de Pessoa
+            Status Sugestão
           </label>
           <div class="relative">
             <select id="tipo" name="type" v-model="form.status"
@@ -96,7 +94,7 @@ const form = useForm({
           <p v-if="form.errors.status" class="text-red-500 text-sm mt-1">{{ form.errors.status }}</p>
         </div>
         <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md">
-          Salvar
+          Criar
         </button>
       </form>
     </div>

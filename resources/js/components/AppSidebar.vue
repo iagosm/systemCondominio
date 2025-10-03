@@ -15,7 +15,7 @@ import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { 
-    LayoutGrid, Notebook, Car , DollarSign, TriangleAlert, Calendar, Brush, UserRoundCheck
+    LayoutGrid, Notebook, Car , DollarSign, TriangleAlert, Calendar, Brush, UserRoundCheck, Lightbulb
 } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
@@ -34,6 +34,11 @@ const mainNavItems: NavItem[] = [
         title: 'Ocorrências',
         href: '/incidents',
         icon: TriangleAlert,
+    },
+    {
+        title: 'Sugestões',
+        href: '/suggestions',
+        icon: Lightbulb,
     },
     {
         title: 'Gastos',
