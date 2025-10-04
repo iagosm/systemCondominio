@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Incident;
 use App\Models\Resident;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class IncidentController extends Controller
@@ -34,12 +35,13 @@ class IncidentController extends Controller
      */
     public function store(Request $request)
     {
+
         $incidents = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'resident_id' => 'required',
             'status' => 'required',
         ]);
+        $incidents['resident_id'] = Auth::id();
         Incident::create($incidents);
         return to_route('incidents.index');
     }
@@ -60,8 +62,7 @@ class IncidentController extends Controller
     public function edit(string $id)
     {
         return Inertia::render('Incidents/Edit', [
-            'incident' => Incident::find($id), 
-            'residents' => Resident::with('user:id,name')->get(), 
+            'incident' => Incident::find($id) 
         ]);
     }
 
@@ -74,13 +75,11 @@ class IncidentController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'resident_id' => 'required',
             'status' => 'required',
         ]);
         $incident = Incident::find($id);
         $incident->title = $request['title'];
         $incident->description = $request['description'];
-        $incident->resident_id = $request['resident_id'];
         $incident->status = $request['status'];
         $incident->save();
         return to_route('incidents.index');

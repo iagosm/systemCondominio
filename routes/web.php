@@ -5,6 +5,7 @@ use App\Http\Controllers\ResidentsController;
 use App\Http\Controllers\RoleController;
 // use App\Http\Controllers\UnitController;
 use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::resource("units", UnitController::class);// Pendente
     Route::resource("incidents", IncidentController::class);
     Route::resource("suggestions", SuggestionController::class);
+    Route::resource("tags", TagsController::class);
     Route::resource("users", UserController::class);
     Route::resource("roles", RoleController::class);
 });

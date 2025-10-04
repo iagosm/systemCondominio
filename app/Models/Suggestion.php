@@ -33,7 +33,13 @@ class Suggestion extends Model
         return [
             'id' => 'integer',
             'resident_id' => 'integer',
+            'created_at' => 'datetime',
         ];
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('d/m/Y H:i:s');
     }
 
     public function resident(): BelongsTo

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Suggestion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class SuggestionController extends Controller
@@ -31,7 +32,14 @@ class SuggestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $suggestion = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+        ]);
+        $suggestion['resident_id'] = Auth::id();
+        Suggestion::create($suggestion);
+        return to_route('suggestions.index');
     }
 
     /**
@@ -39,7 +47,9 @@ class SuggestionController extends Controller
      */
     public function show(string $id)
     {
-        //
+         return Inertia::render('Suggestions/Show', [
+            'suggestion' => Suggestion::find($id)
+        ]);
     }
 
     /**
@@ -47,7 +57,9 @@ class SuggestionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render('Suggestions/Edit', [
+            'suggestion' => Suggestion::find($id)
+        ]);
     }
 
     /**
@@ -55,7 +67,17 @@ class SuggestionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+        ]);
+        $suggestion = Suggestion::find($id);
+        $suggestion->title = $request['title'];
+        $suggestion->description = $request['description'];
+        $suggestion->status = $request['status'];
+        $suggestion->save();
+        return to_route('suggestions.index');
     }
 
     /**
@@ -63,6 +85,7 @@ class SuggestionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Suggestion::destroy($id);
+        return to_route('suggestions.index');
     }
 }

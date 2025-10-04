@@ -5,29 +5,29 @@ import { Head, Link } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
-    title: 'Visualizar Morador',
+    title: 'Visualizar Tag',
     href: '/incidents',
   },
 ];
 
 defineProps({
-  suggestion: Object
+  tag: Object
 });
 
 </script>
 
 <template>
 
-  <Head title="Visualizar Ocorrência" />
+  <Head title="Visualizar Tags" />
   <AppLayout :breadcrumbs="breadcrumbs">
     <div class="overflow-x-auto p-3">
-      <Link :href="route('suggestions.index')"
+      <Link :href="route('tags.index')"
         class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
       Voltar
       </Link>
       <div>
-        <p><strong>Titulo:</strong>{{ suggestion.title }}</p>
-        <p><strong>Descrição:</strong>{{ suggestion.description }}</p>
+        <p><strong>Titulo:</strong>{{ tag.title }}</p>
+        <p><strong>Descrição:</strong>{{ tag.description }}</p>
       </div>
     </div>
   </AppLayout>
