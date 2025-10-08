@@ -28,7 +28,7 @@ const form = useForm({
         class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
       Voltar
       </Link>
-      <form @submit.prevent="form.post(route('tag.store'))" class="space-y-6 mt-4 max-w-md mx-auto">
+      <form @submit.prevent="form.put(route('tags.update', tag.id))" class="space-y-6 mt-4 max-w-md mx-auto">
         <div class="grid gap-2">
           <label for="name" class="text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed">
             Nome:

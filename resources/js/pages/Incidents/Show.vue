@@ -28,6 +28,11 @@ defineProps({
       <div>
         <p><strong>Titulo:</strong>{{ incident.title }}</p>
         <p><strong>Descrição:</strong>{{ incident.description }}</p>
+        <p><strong>Tags:</strong>
+          <span v-for="tag in incident.tags" :key="tag.id" class="px-2 py-1 bg-gray-200 rounded-full mr-1">
+            {{ tag.name }}
+          </span>
+        </p>
       </div>
     </div>
   </AppLayout>

@@ -37,6 +37,11 @@ class Suggestion extends Model
         ];
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'suggestion_tags', 'suggestion_id', 'tag_id');
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d/m/Y H:i:s');

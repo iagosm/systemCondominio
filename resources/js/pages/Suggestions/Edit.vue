@@ -11,13 +11,15 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 const props = defineProps({
-  suggestion: Object
+  suggestion: Object,
+  tags: Array
 });
 
 const form = useForm({
   "title": props.suggestion.title,
   "description": props.suggestion.description,
-  "status": props.suggestion.status
+  "status": props.suggestion.status,
+  "tags": props.suggestion.tags?.[0]?.id || '',
 });
 </script>
 
@@ -30,7 +32,7 @@ const form = useForm({
         class="cursor-pointer rounded bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700">
       Voltar
       </Link>
-      <form @submit.prevent="form.post(route('suggestions.store'))" class="space-y-6 mt-4 max-w-md mx-auto">
+      <form @submit.prevent="form.put(route('suggestions.update', suggestion.id))" class="space-y-6 mt-4 max-w-md mx-auto">
         <div class="grid gap-2">
           <label for="name" class="text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed">
             Título:
@@ -61,6 +63,31 @@ const form = useForm({
               <option value="pendente">Pendente</option>
               <option value="aprovada">Aprovada</option>
               <option value="concluida">Concluida</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+          <p v-if="form.errors.status" class="text-red-500 text-sm mt-1">{{ form.errors.status }}</p>
+        </div>
+        <div class="w-full max-w-sm">
+          <label for="tipo" class="block text-sm font-semibold text-gray-800 mb-2">
+            Tag
+          </label>
+          <div class="relative">
+            <select id="tipo" name="tags" v-model="form.tags"
+              class="block w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-2 pr-10 text-gray-700 shadow-md focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+              <option
+              v-for="tag in tags"
+              :value="tag.id"
+              :key="tag.id"
+              >
+              {{ tag.name }}
+            </option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

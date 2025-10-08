@@ -40,6 +40,7 @@ function deleteOcorrencia(id) {
             <th scope="col" class="px-6 py-3">Titulo</th>
             <th scope="col" class="px-6 py-3">Descrição</th>
             <th scope="col" class="px-6 py-3">Status</th>
+            <th scope="col" class="px-6 py-3">Tags</th>
             <th scope="col" class="px-6 py-3">Criado em</th>
             <th scope="col" class="px-6 py-3">Ações</th>
           </tr>
@@ -50,6 +51,14 @@ function deleteOcorrencia(id) {
             <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{incident.title}}</td>
             <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{incident.description}}</td>
             <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{incident.status}}</td>
+            <td class="px-6 py-2 text-gray-600 dark:text-gray-300">
+            <span
+              v-for="tag in incident.tags"
+              :key="tag.id"
+              class="inline-block bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded">
+              {{ tag.name }}
+            </span>
+          </td>
             <td class="px-6 py-2 text-gray-600 dark:text-gray-300">{{incident.created_at}}</td>
             <td class="flex gap-2 px-6 py-2">
               <Link

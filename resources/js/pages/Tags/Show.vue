@@ -26,8 +26,7 @@ defineProps({
       Voltar
       </Link>
       <div>
-        <p><strong>Titulo:</strong>{{ tag.title }}</p>
-        <p><strong>Descrição:</strong>{{ tag.description }}</p>
+        <p><strong>Titulo:</strong>{{ tag.name }}</p>
       </div>
     </div>
   </AppLayout>

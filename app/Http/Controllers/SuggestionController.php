@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Suggestion;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -15,7 +16,7 @@ class SuggestionController extends Controller
     public function index()
     {
         return Inertia::render('Suggestions/Index', [
-            'suggestions' => Suggestion::all()
+            'suggestions' => Suggestion::with('tags')->get()
         ]);
     }
 
@@ -24,7 +25,9 @@ class SuggestionController extends Controller
      */
     public function create()
     {
-         return Inertia::render('Suggestions/Create');
+         return Inertia::render('Suggestions/Create',[
+            'tags' => Tag::all()
+         ]);
     }
 
     /**
@@ -32,13 +35,14 @@ class SuggestionController extends Controller
      */
     public function store(Request $request)
     {
-        $suggestion = $request->validate([
+        $suggestionValid = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'status' => 'required',
         ]);
-        $suggestion['resident_id'] = Auth::id();
-        Suggestion::create($suggestion);
+        $suggestionValid['resident_id'] = Auth::id();
+        $suggestion = Suggestion::create($suggestionValid);
+        $suggestion->tags()->attach($request['tags']);
         return to_route('suggestions.index');
     }
 
@@ -48,7 +52,7 @@ class SuggestionController extends Controller
     public function show(string $id)
     {
          return Inertia::render('Suggestions/Show', [
-            'suggestion' => Suggestion::find($id)
+            'suggestion' => Suggestion::with('tags')->findOrFail($id)
         ]);
     }
 
@@ -58,7 +62,8 @@ class SuggestionController extends Controller
     public function edit(string $id)
     {
         return Inertia::render('Suggestions/Edit', [
-            'suggestion' => Suggestion::find($id)
+            'suggestion' => Suggestion::with('tags')->findOrFail($id),
+            'tags' => Tag::all()
         ]);
     }
 
@@ -71,11 +76,13 @@ class SuggestionController extends Controller
             'title' => 'required',
             'description' => 'required',
             'status' => 'required',
+            'tags' => 'required',
         ]);
         $suggestion = Suggestion::find($id);
         $suggestion->title = $request['title'];
         $suggestion->description = $request['description'];
         $suggestion->status = $request['status'];
+        $suggestion->tags()->sync([$request['tags']]);
         $suggestion->save();
         return to_route('suggestions.index');
     }

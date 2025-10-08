@@ -36,6 +36,11 @@ class Incident extends Model
         ];
     }
 
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'incident_tags', 'incident_id', 'tag_id');
+    }
+
     public function resident(): BelongsTo
     {
         return $this->belongsTo(Resident::class);

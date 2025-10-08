@@ -43,7 +43,9 @@ class TagsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render('Tags/Show', [
+            'tag' => Tag::find($id)
+        ]);
     }
 
     /**
@@ -75,6 +77,7 @@ class TagsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Tag::destroy($id);
+        return to_route('tags.index');
     }
 }

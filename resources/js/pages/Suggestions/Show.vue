@@ -28,6 +28,11 @@ defineProps({
       <div>
         <p><strong>Titulo:</strong>{{ suggestion.title }}</p>
         <p><strong>Descrição:</strong>{{ suggestion.description }}</p>
+        <p><strong>Tags:</strong>
+          <span v-for="tag in suggestion.tags" :key="tag.id" class="px-2 py-1 bg-gray-200 rounded-full mr-1">
+            {{ tag.name }}
+          </span>
+        </p>
       </div>
     </div>
   </AppLayout>
